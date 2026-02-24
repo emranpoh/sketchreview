@@ -11,12 +11,13 @@ const SYSTEM_PROMPT = "You are ChatGPT, a large language model trained by OpenAI
 const hashSplitted = window.location.hash.split("?");
 const search = hashSplitted[hashSplitted.length-1]
 const params = new URLSearchParams(search);
-const key = params.get('k');
+const keyFromUrl = params.get('k');
+const apiKey = keyFromUrl ? atob(keyFromUrl) : (process.env.REACT_APP_OPENAI_API_KEY || "");
 let gptModel = atob(params.get('m') || btoa('gpt-4-1106-preview'));
 
 
 const openai = new OpenAI({
-  apiKey: atob(key || ""),
+  apiKey,
   dangerouslyAllowBrowser: true
 });
 

@@ -3,8 +3,10 @@ import { useModelStore } from '../model/Model';
 import { useStudyModelStore } from "./study/StudyModel";
 import GithubCorner from "react-github-corner";
 
+const envApiKey = process.env.REACT_APP_OPENAI_API_KEY || "";
+
 export default function Launcher(props: { children: React.ReactNode, leftSide?: React.ReactNode }) {
-  const [accessKey, setAccessKey] = useState('');
+  const [accessKey, setAccessKey] = useState(envApiKey);
   const [gptModel, setStoredGptModel] = useState('gpt-4o');
   const setGptModel = useModelStore((state) => state.setGptModel);
   const setOpenAIKey = useModelStore((state) => state.setOpenAIKey);
